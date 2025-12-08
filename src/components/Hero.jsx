@@ -63,99 +63,117 @@ export default function Hero() {
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
-                className="relative z-10 section-container text-center py-32"
+                className="relative z-10 section-container py-32 flex flex-col-reverse md:flex-row items-center justify-between gap-12"
             >
-                {/* Greeting */}
-                <motion.p
-                    variants={itemVariants}
-                    className="text-[var(--color-text-secondary)] text-lg mb-4"
-                >
-                    Hello, I'm
-                </motion.p>
+                {/* Left Side - Text Content */}
+                <div className="text-center md:text-left flex-1">
+                    {/* Greeting */}
+                    <motion.p
+                        variants={itemVariants}
+                        className="text-[var(--color-text-secondary)] text-lg mb-4"
+                    >
+                        Hello, I'm
+                    </motion.p>
 
-                {/* Name */}
-                <motion.h1
-                    variants={itemVariants}
-                    className="text-5xl md:text-7xl font-bold mb-6 tracking-tight"
-                >
-                    <span className="gradient-text">{personal.name}</span>
-                </motion.h1>
+                    {/* Name */}
+                    <motion.h1
+                        variants={itemVariants}
+                        className="text-5xl md:text-7xl font-bold mb-6 tracking-tight"
+                    >
+                        <span className="gradient-text">{personal.name}</span>
+                    </motion.h1>
 
-                {/* Title */}
-                <motion.h2
-                    variants={itemVariants}
-                    className="text-xl md:text-2xl text-[var(--color-text-secondary)] mb-8 max-w-2xl mx-auto"
-                >
-                    {personal.title}
-                </motion.h2>
+                    {/* Title */}
+                    <motion.h2
+                        variants={itemVariants}
+                        className="text-xl md:text-2xl text-[var(--color-text-secondary)] mb-8 max-w-2xl"
+                    >
+                        {personal.title}
+                    </motion.h2>
 
-                {/* Subtitle */}
-                <motion.p
-                    variants={itemVariants}
-                    className="text-[var(--color-text-muted)] max-w-xl mx-auto mb-10 leading-relaxed"
-                >
-                    {personal.subtitle}
-                </motion.p>
+                    {/* Subtitle */}
+                    <motion.p
+                        variants={itemVariants}
+                        className="text-[var(--color-text-muted)] max-w-xl mb-10 leading-relaxed"
+                    >
+                        {personal.subtitle}
+                    </motion.p>
 
-                {/* Tags */}
-                <motion.div
-                    variants={itemVariants}
-                    className="flex flex-wrap justify-center gap-3 mb-12"
-                >
-                    {heroTags.map((tag, index) => (
-                        <motion.span
-                            key={tag}
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: 0.8 + index * 0.1 }}
-                            className="tag"
+                    {/* Tags */}
+                    <motion.div
+                        variants={itemVariants}
+                        className="flex flex-wrap justify-center md:justify-start gap-3 mb-12"
+                    >
+                        {heroTags.map((tag, index) => (
+                            <motion.span
+                                key={tag}
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ delay: 0.8 + index * 0.1 }}
+                                className="tag"
+                            >
+                                {tag}
+                            </motion.span>
+                        ))}
+                    </motion.div>
+
+                    {/* CTA Buttons */}
+                    <motion.div
+                        variants={itemVariants}
+                        className="flex flex-wrap justify-center md:justify-start gap-4"
+                    >
+                        <motion.a
+                            href="#contact"
+                            className="btn-primary"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+                            }}
                         >
-                            {tag}
-                        </motion.span>
-                    ))}
-                </motion.div>
+                            <Mail size={18} />
+                            Get in Touch
+                            <ArrowRight size={18} />
+                        </motion.a>
 
-                {/* CTA Buttons */}
+                        <motion.a
+                            href={personal.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn-secondary"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
+                            <Github size={18} />
+                            View GitHub
+                        </motion.a>
+
+                        <motion.a
+                            href={personal.resumeUrl}
+                            className="btn-secondary"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
+                            <Download size={18} />
+                            Download Resume
+                        </motion.a>
+                    </motion.div>
+                </div>
+
+                {/* Right Side - Profile Image */}
                 <motion.div
                     variants={itemVariants}
-                    className="flex flex-wrap justify-center gap-4"
+                    className="flex-shrink-0 relative"
                 >
-                    <motion.a
-                        href="#contact"
-                        className="btn-primary"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={(e) => {
-                            e.preventDefault();
-                            document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
-                        }}
-                    >
-                        <Mail size={18} />
-                        Get in Touch
-                        <ArrowRight size={18} />
-                    </motion.a>
-
-                    <motion.a
-                        href={personal.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn-secondary"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                    >
-                        <Github size={18} />
-                        View GitHub
-                    </motion.a>
-
-                    <motion.a
-                        href={personal.resumeUrl}
-                        className="btn-secondary"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                    >
-                        <Download size={18} />
-                        Download Resume
-                    </motion.a>
+                    <div className="profile-image-portrait-border"></div>
+                    <div className="profile-image-portrait">
+                        <img
+                            src="/profile.jpeg"
+                            alt={`${personal.name}'s profile`}
+                            className="profile-image"
+                        />
+                    </div>
                 </motion.div>
 
                 {/* Scroll Indicator */}

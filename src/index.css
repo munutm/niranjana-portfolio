@@ -112,6 +112,98 @@ body {
   .form-error {
     @apply text-red-500 text-sm mt-1;
   }
+
+  /* Profile Image - Monochromatic with Highlight */
+  .profile-image-container {
+    @apply relative w-64 h-64 md:w-80 md:h-80 mx-auto rounded-full overflow-hidden;
+    box-shadow:
+      0 0 40px rgba(99, 102, 241, 0.3),
+      0 0 80px rgba(99, 102, 241, 0.15),
+      inset 0 0 60px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Profile Image - Tall portrait style with shades */
+  .profile-image-portrait {
+    @apply relative w-56 h-80 md:w-72 md:h-[28rem] rounded-2xl overflow-hidden;
+    box-shadow:
+      0 0 50px rgba(99, 102, 241, 0.3),
+      0 0 100px rgba(99, 102, 241, 0.15),
+      0 20px 40px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Edge fade overlay - fades borders without cropping content */
+  .profile-image-portrait::before {
+    content: '';
+    @apply absolute inset-0 z-10 pointer-events-none;
+    background:
+      linear-gradient(to bottom, rgba(10, 10, 10, 0.6) 0%, transparent 15%),
+      linear-gradient(to top, rgba(10, 10, 10, 0.8) 0%, transparent 25%),
+      linear-gradient(to right, rgba(10, 10, 10, 0.6) 0%, transparent 15%),
+      linear-gradient(to left, rgba(10, 10, 10, 0.6) 0%, transparent 15%);
+  }
+
+  /* Bottom accent glow */
+  .profile-image-portrait::after {
+    content: '';
+    @apply absolute inset-x-0 bottom-0 h-1/4 z-10 pointer-events-none;
+    background: linear-gradient(to top, rgba(99, 102, 241, 0.25), transparent);
+  }
+
+  /* Profile image inside portrait container - show head */
+  .profile-image-portrait .profile-image {
+    @apply w-full h-full transition-all duration-500;
+    object-fit: cover;
+    object-position: top center;
+    filter: grayscale(100%) contrast(1.1) brightness(1.05);
+  }
+
+  /* Glowing border overlay */
+  .profile-image-portrait-border {
+    @apply absolute inset-[-3px] rounded-2xl -z-10;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.7), rgba(139, 92, 246, 0.5), rgba(59, 130, 246, 0.7));
+    animation: pulseGlow 3s ease-in-out infinite;
+  }
+
+  .profile-image-portrait:hover {
+    box-shadow:
+      0 0 70px rgba(99, 102, 241, 0.5),
+      0 0 120px rgba(99, 102, 241, 0.25),
+      0 25px 50px rgba(0, 0, 0, 0.6);
+  }
+
+  .profile-image-portrait:hover .profile-image {
+    filter: grayscale(40%) contrast(1.2) brightness(1.1);
+    transform: scale(1.02);
+  }
+
+  .profile-image-container::before {
+    content: '';
+    @apply absolute inset-0 rounded-full z-10;
+    background: linear-gradient(135deg, transparent 40%, rgba(99, 102, 241, 0.25) 100%);
+  }
+
+  .profile-image-container::after {
+    content: '';
+    @apply absolute inset-[-3px] rounded-full -z-10;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.6), rgba(139, 92, 246, 0.6), rgba(59, 130, 246, 0.6));
+    animation: borderRotate 4s linear infinite;
+  }
+
+  .profile-image {
+    @apply w-full h-full object-cover transition-all duration-500;
+    filter: grayscale(100%) contrast(1.1) brightness(1.05);
+  }
+
+  .profile-image-container:hover .profile-image {
+    filter: grayscale(50%) contrast(1.15) brightness(1.1);
+  }
+
+  .profile-image-container:hover {
+    box-shadow:
+      0 0 60px rgba(99, 102, 241, 0.5),
+      0 0 100px rgba(99, 102, 241, 0.25),
+      inset 0 0 60px rgba(0, 0, 0, 0.3);
+  }
 }
 
 /* ===== Utility Classes ===== */
@@ -146,5 +238,15 @@ body {
 
   50% {
     opacity: 1;
+  }
+}
+
+@keyframes borderRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
   }
 }
