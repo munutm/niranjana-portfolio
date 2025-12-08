@@ -169,7 +169,7 @@ export default function Hero() {
                     <div className="profile-image-portrait-border"></div>
                     <div className="profile-image-portrait">
                         <img
-                            src="/profile.jpeg"
+                            src="/anamika.png"
                             alt={`${personal.name}'s profile`}
                             className="profile-image"
                         />
